@@ -12,7 +12,7 @@ class App extends Component {
     otherState: 'Some other value'
   }
 
-  
+
   switchNameHandler = () => {
     // console.log('was clicked')
     //**don't do this -> */ this.state.persons[0].name='Maximilian'
@@ -33,11 +33,29 @@ class App extends Component {
       <div className="App">
         <h1>React is now working</h1>
         <p>This is showing now</p>
-        <button onClick={this.switchNameHandler}>Switch names</button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-        <Person name={this.state.persons[1].name} age={this.state.persons[1].age}>Some of my hobbies are: Programming! </Person>
+        <button onClick={this.switchNameHandler}>
+          Switch names & age
+        </button>
+
+        <Person
+          name={this.state.persons[0].name}
+          age={this.state.persons[0].age}
+          click={this.switchNameHandler}
+        />
+
+        <Person
+          name={this.state.persons[1].name}
+          age={this.state.persons[1].age}
+          click={this.switchNameHandler}>
+          Some of my hobbies are: Programming!
+        </Person>
+
         {/* <Person name='Reactron' age=' 18 '>Some of my hobbies are: Programming! </Person> */}
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age}/>
+
+        <Person
+          name={this.state.persons[2].name}
+          age={this.state.persons[2].age}
+        />
       </div>
     );
 
