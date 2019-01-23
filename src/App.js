@@ -26,7 +26,9 @@ class App extends Component {
   }
 
 
-  nameChangedHandler = (event)=>{
+
+
+  nameChangedHandler = (event) => {
     this.setState({
       persons: [
         { name: 'Horchata', age: 28 },
@@ -36,49 +38,52 @@ class App extends Component {
     })
   }
 
-  
+
 
   render() {
 
     // this is inline styling sometimes its restricted to the scope
     const style = {
-      backgroundColor:'white',
-      font:'inherit',
-      border:'1px dotted blue',
-      padding:'8px',
-      cursor:'pointer'
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px dotted blue',
+      padding: '8px',
+      cursor: 'pointer'
     }
 
     return (
       <div className="App">
         <h1>React is now working</h1>
         <p>This is showing now</p>
-        <button style={style} 
-        onClick={() => this.switchNameHandler('moxy')}>
+        <button style={style}
+          onClick={this.togglePersonsHanlder}>
           Switch names & age
         </button>
         {/* it's preferred to use bind as example below vs anon func above */}
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-          click={this.switchNameHandler.bind(this, 'Meezus')}
-        />
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+            click={this.switchNameHandler.bind(this, 'Meezus')}
+          />
 
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler}
-          changed={this.nameChangedHandler}
-        >
-          Some of my hobbies are: Programming!
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={this.switchNameHandler}
+            changed={this.nameChangedHandler}
+          >
+            Some of my hobbies are: Programming!
         </Person>
 
-        {/* <Person name='Reactron' age=' 18 '>Some of my hobbies are: Programming! </Person> */}
+          {/* <Person name='Reactron' age=' 18 '>Some of my hobbies are: Programming! </Person> */}
 
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-        />
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+          />
+
+        </div>
       </div>
     );
 
