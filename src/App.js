@@ -9,7 +9,8 @@ class App extends Component {
       { name: ' Og P2', age: 18 },
       { name: ' Og p3', age: 42 }
     ],
-    otherState: 'Some other value'
+    otherState: 'Some other value',
+    showPersons: false
   }
 
 
@@ -34,14 +35,18 @@ class App extends Component {
     })
   }
 
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons:!doesShow});
+  }
 
 
 
   render() {
 
-// deifined variable inside render() it's not a function, it's just a variable.
-// using this inline style is only used in this scope & it will not be global.
-// this was applied to the button in this case.
+    // deifined variable inside render() it's not a function, it's just a variable.
+    // using this inline style is only used in this scope & it will not be global.
+    // this was applied to the button in this case.
     const style = {
       backgroundColor: 'gray',
       font: 'inherit',
@@ -57,36 +62,40 @@ class App extends Component {
         <p>This is showing now</p>
         <button style={style}
           // onClick={this.switchNameAndAgeHandler.bind(this,'BTN NAME CHG')}
-          onClick={() => this.switchNameAndAgeHandler('BTN NAME CHG')}
+          onClick={this.togglePersonsHandler}
         >
           Switch names & age
         </button>
-        <div>
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}
-            click={this.switchNameAndAgeHandler}
-          />
 
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.switchNameAndAgeHandler}
-            changed={this.changedNameHandler}
+        {this.state.showPersons ?
 
-          >
-            Some of my hobbies are: Programming!
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+              click={this.switchNameAndAgeHandler}
+            />
+
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={this.switchNameAndAgeHandler}
+              changed={this.changedNameHandler}
+
+            >
+              Some of my hobbies are: Programming!
         </Person>
 
 
 
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age}
-            click={this.switchNameAndAgeHandler.bind(this, 'NEW NM CHG')}
-          />
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}
+              click={this.switchNameAndAgeHandler.bind(this, 'NEW NM CHG')}
+            />
 
-        </div>
+          </div> : null
+        }
       </div>
     );
 
