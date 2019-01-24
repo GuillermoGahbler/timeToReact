@@ -24,7 +24,7 @@ class App extends Component {
   }
 
 
-  changeNameHandler = (event) =>{
+  changedNameHandler = (event) =>{
     this.setState({
       persons: [
         { name: 'New P1', age: 28 },
@@ -41,11 +41,12 @@ class App extends Component {
 
 
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'gray',
       font: 'inherit',
-      border: '1px dotted blue',
+      // border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      boxShadow: '0 2px 3px #ccc'
     }
 
     return (
@@ -69,7 +70,7 @@ class App extends Component {
             name={this.state.persons[1].name}
             age={this.state.persons[1].age}
             click={this.switchNameAndAgeHandler}
-            changed={this.changeNameHandler}
+            changed={this.changedNameHandler}
 
                        >
             Some of my hobbies are: Programming!
