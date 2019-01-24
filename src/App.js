@@ -18,28 +18,30 @@ class App extends Component {
       persons: [
         { name: 'New P1', age: 28 },
         { name: ' New P2', age: 38 },
-        { name:newName, age: 42 }
+        { name: newName, age: 42 }
       ]
     })
   }
 
 
-  changedNameHandler = (event) =>{
+  changedNameHandler = (event) => {
     this.setState({
       persons: [
         { name: 'New P1', age: 28 },
-        { name:event.target.value, age: 38 },
-        { name:'New P3', age: 42 }
+        { name: event.target.value, age: 38 },
+        { name: 'New P3', age: 42 }
       ]
     })
   }
 
-   
+
 
 
   render() {
 
-
+// deifined variable inside render() it's not a function, it's just a variable.
+// using this inline style is only used in this scope & it will not be global.
+// this was applied to the button in this case.
     const style = {
       backgroundColor: 'gray',
       font: 'inherit',
@@ -54,8 +56,8 @@ class App extends Component {
         <h1>React is now working</h1>
         <p>This is showing now</p>
         <button style={style}
-        // onClick={this.switchNameAndAgeHandler.bind(this,'BTN NAME CHG')}
-        onClick={()=>this.switchNameAndAgeHandler('BTN NAME CHG')}
+          // onClick={this.switchNameAndAgeHandler.bind(this,'BTN NAME CHG')}
+          onClick={() => this.switchNameAndAgeHandler('BTN NAME CHG')}
         >
           Switch names & age
         </button>
@@ -64,7 +66,7 @@ class App extends Component {
             name={this.state.persons[0].name}
             age={this.state.persons[0].age}
             click={this.switchNameAndAgeHandler}
-                      />
+          />
 
           <Person
             name={this.state.persons[1].name}
@@ -72,7 +74,7 @@ class App extends Component {
             click={this.switchNameAndAgeHandler}
             changed={this.changedNameHandler}
 
-                       >
+          >
             Some of my hobbies are: Programming!
         </Person>
 
