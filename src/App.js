@@ -34,15 +34,46 @@ class App extends Component {
       ]
     })
   }
-
+  // to show or hide div containing persons
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({showPersons:!doesShow});
+    this.setState({ showPersons: !doesShow });
   }
 
 
 
   render() {
+
+
+    let persons = null;
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          <Person
+            name={this.state.persons[0].name}
+            age={this.state.persons[0].age}
+            click={this.switchNameAndAgeHandler}
+          />
+
+          <Person
+            name={this.state.persons[1].name}
+            age={this.state.persons[1].age}
+            click={this.switchNameAndAgeHandler}
+            changed={this.changedNameHandler}
+          >
+            Some of my hobbies are: Programming!
+            </Person>
+
+          <Person
+            name={this.state.persons[2].name}
+            age={this.state.persons[2].age}
+            click={this.switchNameAndAgeHandler.bind(this, 'NEW NM CHG')}
+          />
+
+        </div>
+      )
+    }
+
 
     // deifined variable inside render() it's not a function, it's just a variable.
     // using this inline style is only used in this scope & it will not be global.
@@ -58,44 +89,19 @@ class App extends Component {
 
     return (
       <div className="App">
+
         <h1>React is now working</h1>
         <p>This is showing now</p>
+
         <button style={style}
           // onClick={this.switchNameAndAgeHandler.bind(this,'BTN NAME CHG')}
-          onClick={this.togglePersonsHandler}
-        >
-          Switch names & age
-        </button>
+          onClick={this.togglePersonsHandler}>
+          Toggle button to show Persons!
+         </button>
 
-        {this.state.showPersons ?
+        {/* the div below will not be rendered until the button is clicked */}
+        {persons}
 
-          <div>
-            <Person
-              name={this.state.persons[0].name}
-              age={this.state.persons[0].age}
-              click={this.switchNameAndAgeHandler}
-            />
-
-            <Person
-              name={this.state.persons[1].name}
-              age={this.state.persons[1].age}
-              click={this.switchNameAndAgeHandler}
-              changed={this.changedNameHandler}
-
-            >
-              Some of my hobbies are: Programming!
-        </Person>
-
-
-
-            <Person
-              name={this.state.persons[2].name}
-              age={this.state.persons[2].age}
-              click={this.switchNameAndAgeHandler.bind(this, 'NEW NM CHG')}
-            />
-
-          </div> : null
-        }
       </div>
     );
 
