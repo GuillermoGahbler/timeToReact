@@ -99,7 +99,7 @@ class App extends Component {
           Toggle button to show Persons!
          </button>
 
-        {/* the div below will not be rendered until the button is clicked */}
+ 
         {persons}
 
       </div>
