@@ -1,3 +1,4 @@
+// import our files 
 import React, { Component } from 'react';
 import './App.css';
 import Person from './Person/Person';
@@ -14,17 +15,6 @@ class App extends Component {
   }
 
 
-  switchNameAndAgeHandler = (newName) => {
-    this.setState({
-      persons: [
-        { name: 'New P1', age: 28 },
-        { name: ' New P2', age: 38 },
-        { name: newName, age: 42 }
-      ]
-    })
-  }
-
-
   changedNameHandler = (event) => {
     this.setState({
       persons: [
@@ -34,6 +24,14 @@ class App extends Component {
       ]
     })
   }
+
+  deletePersonHandler = (personIndex) =>{
+    // const persons = this.state.persons.slice();
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({persons:persons})
+  }
+
   // to show or hide div containing persons
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
@@ -41,43 +39,11 @@ class App extends Component {
   }
 
 
-
+  //render creates component by extending the component object
+  // deifined variable inside render() it's not a function, it's just a variable.
   render() {
 
-
-    let persons = null;
-    if (this.state.showPersons) {
-      persons = (
-        <div>
-          <Person
-            name={this.state.persons[0].name}
-            age={this.state.persons[0].age}
-            click={this.switchNameAndAgeHandler}
-          />
-
-          <Person
-            name={this.state.persons[1].name}
-            age={this.state.persons[1].age}
-            click={this.switchNameAndAgeHandler}
-            changed={this.changedNameHandler}
-          >
-            Some of my hobbies are: Programming!
-            </Person>
-
-          <Person
-            name={this.state.persons[2].name}
-            age={this.state.persons[2].age}
-            click={this.switchNameAndAgeHandler.bind(this, 'NEW NM CHG')}
-          />
-
-        </div>
-      )
-    }
-
-
-    // deifined variable inside render() it's not a function, it's just a variable.
     // using this inline style is only used in this scope & it will not be global.
-    // this was applied to the button in this case.
     const style = {
       backgroundColor: 'gray',
       font: 'inherit',
@@ -87,6 +53,26 @@ class App extends Component {
       boxShadow: '0 2px 3px #ccc'
     }
 
+
+    let persons = null;
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          {this.state.persons.map((person, index) => {
+            return <Person 
+            click={()=>this.deletePersonHandler(index)}
+            name={person.name} 
+            age={person.age} 
+            />
+          })}
+
+        </div>
+      )
+    }
+
+
+
+    // all functions above passed into the return div below will display on the page. 
     return (
       <div className="App">
 
@@ -98,8 +84,6 @@ class App extends Component {
           onClick={this.togglePersonsHandler}>
           Toggle button to show Persons!
          </button>
-
- 
         {persons}
 
       </div>
