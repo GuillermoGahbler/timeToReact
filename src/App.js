@@ -6,9 +6,10 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      { name: ' Og P1', age: 25 },
-      { name: ' Og P2', age: 18 },
-      { name: ' Og p3', age: 42 }
+      // added and id key to be more specific. Id can be anything unique
+      { id:'sdf',name: ' Og P1', age: 25 },
+      { id:'fgdf' ,name:' Og P2', age: 18 },
+      { id:'gh' ,name:' Og p3', age: 42 }
     ],
     otherState: 'Some other value',
     showPersons: false
@@ -63,6 +64,8 @@ class App extends Component {
             click={()=>this.deletePersonHandler(index)}
             name={person.name} 
             age={person.age} 
+            // assigned key id so that react knows to specifically target these values
+            key={person.id}
             />
           })}
 
