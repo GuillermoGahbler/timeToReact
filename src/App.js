@@ -16,13 +16,26 @@ class App extends Component {
   }
 
 
-  changedNameHandler = (event) => {
+  changedNameHandler = (event, id) => {
+    const personIndex= this.state.persons.findIndex(p => {
+      return p.id === id;
+    });
+
+    const person = {...this.state.persons[personIndex]}
+    
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+
     this.setState({
-      persons: [
-        { name: 'New P1', age: 28 },
-        { name: event.target.value, age: 38 },
-        { name: 'New P3', age: 42 }
-      ]
+      persons:persons
+      // persons: [
+      //   { name: 'New P1', age: 28 },
+      //   { name: event.target.value, age: 38 },
+      //   { name: 'New P3', age: 42 }
+      // ]
     })
   }
 
@@ -66,6 +79,7 @@ class App extends Component {
             age={person.age} 
             // assigned key id so that react knows to specifically target these values
             key={person.id}
+            changed={(event)=>this.changedNameHandler(event,person.id)}
             />
           })}
 
